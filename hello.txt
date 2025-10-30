@@ -1,1 +1,293 @@
-"Hello World!" 
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+void userServices() {
+	cout << "(1) Basic Calculator" << endl;
+	cout << "(2) Temperature Converter" << endl;
+	cout << "(3) Dollar-Peso Exchange" << endl;
+	cout << "(4) Exit" << endl << endl;
+	cout << "Select services: ";
+}
+
+void basicCalculatorPrompt() {
+	cout << "(1) Add" << endl;
+	cout << "(2) Subtract" << endl;
+	cout << "(3) Multiply" << endl;
+	cout << "(4) Divide" << endl;
+	cout << "(5) Go Back" << endl << endl;
+	cout << "Select option: ";
+}
+
+void temperatureConverterPrompt() {
+	cout << "(1) Fahrenheit to Celsius" << endl;
+	cout << "(2) Celsius to Fahrenheit" << endl;
+	cout << "(3) Go Back" << endl << endl;
+	cout << "Select option: ";
+}
+
+void dollarPesoExchangePrompt() {
+	cout << "(1) Dollar to Peso" << endl;
+	cout << "(2) Peso to Dollar" << endl;
+	cout << "(3) Go Back" << endl << endl;
+	cout << "Select option: ";
+}
+
+void lines();
+
+void calculatorInputs(int &firstInteger, int &secondInteger);
+int computeSum(int firstInteger, int secondInteger);
+int computeDifference(int firstInteger, int secondInteger);
+int computeProduct(int firstInteger, int secondInteger);
+int computeQuotient(int firstInteger, int secondInteger);
+
+void converterInputs(float &temperature);
+float convertToCelsius(float temperature);
+float convertToFahrenheit(float temperature);
+
+void exchangeInputs(float &currency);
+float convertToPeso(float currency);
+float convertToDollar(float currency);
+
+int main() {
+	
+	int firstInteger, secondInteger; 
+	int sum, difference, product, quotient;
+	float temperature, fahrenheit, celsius;
+	float currency, dollar, peso;
+	int services = 0;
+	int option = 0;
+	
+	cout << "ALL-IN-ONE SERVICES" << endl;		
+	lines();
+	userServices();
+	cin >> services;
+		
+	do {
+		       
+		if (services == 4) {
+			cout << "Service ended. Thank you." << endl;
+			return 0;	
+		}
+		
+		switch (services) {
+			
+			case 1: {
+				lines();
+				option = 0;
+				cout << "BASIC CALCULATOR" << endl;
+	
+				while (option != 5) {
+				
+			    	lines();
+			    	basicCalculatorPrompt();
+			    	cin >> option;
+			
+				    switch (option) {
+				        
+			            case 1: { 
+			                calculatorInputs(firstInteger, secondInteger);
+			            	sum = computeSum(firstInteger, secondInteger);
+			            	cout << "The sum is " << sum << endl;
+			            	break;
+			            }
+			            case 2: { 
+			                calculatorInputs(firstInteger, secondInteger);
+			            	difference = computeDifference(firstInteger, secondInteger);
+			                cout << "The difference is " << difference << endl;
+			                break;
+			            }
+			            case 3: { 
+			                calculatorInputs(firstInteger, secondInteger);
+			            	product = computeProduct(firstInteger, secondInteger);
+			                cout << "The product is " << product << endl;
+			                break;
+			            }
+			            case 4: { 
+			                calculatorInputs(firstInteger, secondInteger);
+			            	if (secondInteger == 0) {
+			                    cout << "The quotient is undefined" << endl;
+			                    break;
+			                }
+			            	quotient = computeQuotient(firstInteger, secondInteger);
+			                cout << "The quotient is " << quotient << endl;
+			                break;
+			            }
+			            case 5: {
+			                lines();
+			                cout << "Basic Calculator ended. Thank you." << endl;
+			                break;
+			            }
+			            default: {
+			                cout << "Invalid option. Please try again." << endl;
+			                break;
+			            }
+				    }
+				}
+				break;
+			}
+			case 2: {
+				lines();
+				option = 0;
+				cout << "TEMPERATURE CONVERTER" << endl;
+		
+				while (option != 3) {
+				
+			    	lines();
+			    	temperatureConverterPrompt();
+			    	cin >> option;
+			    	cout << fixed << setprecision(2);
+			
+				    switch (option) {
+				        
+			            case 1: { 
+			                converterInputs(temperature);
+			            	celsius = convertToCelsius(temperature);
+			            	cout << "The temperature is " << celsius 
+							<< char(248) << "C" << endl;
+			            	break;
+			            }
+			            case 2: { 
+			                converterInputs(temperature);
+			            	fahrenheit = convertToFahrenheit(temperature);
+			                cout << "The temperature is " << fahrenheit 
+							<< char(248) << "F" << endl;
+			                break;
+			            }
+			            case 3: {
+			                lines();
+			                cout << "Temperature Converter ended. Thank you." << endl;
+			                break;
+			            }
+			            default: {
+			                cout << "Invalid option. Please try again." << endl;
+			                break;
+			            }
+				    }
+				}				
+				break;
+			}
+			case 3: {
+				lines();
+				option = 0;
+				cout << "DOLLAR-PESO EXCHANGE" << endl;
+		
+				while (option != 3) {
+				
+			    	lines();
+			    	dollarPesoExchangePrompt();
+			    	cin >> option;
+			    	cout << fixed << setprecision(2);
+			
+				    switch (option) {
+				        
+			            case 1: { 
+			                exchangeInputs(currency);
+			            	peso = convertToPeso(currency);
+			            	cout << "The currency is " << peso << " PHP" << endl;
+			            	break;
+			            }
+			            case 2: { 
+			                exchangeInputs(currency);
+			            	dollar = convertToDollar(currency);
+			                cout << "The currency is " << dollar << " USD" << endl;
+			                break;
+			            }
+			            case 3: {
+			                lines();
+			                cout << "Dollar-Peso Exchange ended. Thank you." << endl;
+			                break;
+			            }
+			            default: {
+			                cout << "Invalid option. Please try again." << endl;
+			                break;
+			            }
+				    }
+				}			
+				break;
+			}
+			default: {
+				cout << "Invalid option. Please try again." << endl;
+				break;
+			}
+		}
+		
+		lines();
+		cout << "ALL-IN-ONE SERVICES" << endl;
+		lines();
+		userServices();
+		cin >> services;	
+	}
+	
+	while (services != 4);
+	
+	lines();
+	cout << "Service ended. Thank you." << endl;
+				
+	return 0;
+}
+
+void lines() {
+    cout << endl;
+    for (int lines = 0; lines < 40; lines++) {
+        cout << "-";
+    }
+    cout << endl;
+}
+
+void calculatorInputs(int &firstInteger, int &secondInteger) {
+    cout << "Enter the first integer: ";
+    cin >> firstInteger;
+    cout << "Enter the second integer: ";
+    cin >> secondInteger;
+}
+
+int computeSum(int firstInteger, int secondInteger) {
+	int sum = firstInteger + secondInteger;
+	return sum;		
+}
+
+int computeDifference(int firstInteger, int secondInteger) {
+	int difference = firstInteger - secondInteger;
+	return difference;		
+}
+
+int computeProduct(int firstInteger, int secondInteger) {
+	int product = firstInteger * secondInteger;
+	return product;		
+}
+
+int computeQuotient(int firstInteger, int secondInteger) {
+	int quotient = firstInteger / secondInteger;
+	return quotient;		
+}
+
+void converterInputs(float &temperature) {
+    cout << "Enter the temperature: ";
+    cin >> temperature;
+}
+
+float convertToCelsius(float temperature) {
+	float celsius = (temperature - 32) / 1.8;
+	return celsius;		
+}
+
+float convertToFahrenheit(float temperature) {
+	float fahrenheit = (temperature * 1.8) + 32;
+	return fahrenheit;		
+}
+
+void exchangeInputs(float &currency) {
+    cout << "Enter the amount: ";
+    cin >> currency;
+}
+
+float convertToPeso(float currency) {
+	float peso = currency * 58;
+	return peso;		
+}
+
+float convertToDollar(float currency) {
+	float dollar = currency / 58;
+	return dollar;		
+}
